@@ -130,7 +130,7 @@ else
 endif
 
 
-$(objDir) = obj
+objDir = obj
 # make all .c or .cpp
 #将c文件编译为o文件，并放在指定放置目标文件的目录中即 obj
 $(OBJ):%.o:%.c
