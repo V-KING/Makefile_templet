@@ -129,10 +129,13 @@ else
 	$(Q)$(CXX) $(CXXFLAGS) $^ -o $(target) $(LDFLAGS)
 endif
 
+
+$(objDir) = obj
 # make all .c or .cpp
-%.o: %.c
+#将c文件编译为o文件，并放在指定放置目标文件的目录中即 obj
+$(OBJ):%.o:%.c
 	@$(NQ) "Compiling: " $(addsuffix .c, $(basename $(notdir $@)))
-	$(Q)$(CC) $(CFLAGS) -c $< -o $@
+	$(Q)$(CC) $(CFLAGS) -c $< -o $(objDir)/$@
 
 %.o: %.cpp
 	@$(NQ) "Compiling: " $(addsuffix .cpp, $(basename $(notdir $@)))
@@ -141,8 +144,9 @@ endif
 clean:
 	@$(NQ) "Cleaning..."
 	$(Q)$(RM) $(target)
-
-# use 'grep -v soapC.o' to skip the file
 	@find . -iname '*.o' -o -iname '*.bak' -o -iname '*.d' | xargs rm -f
+style:
+	find ./ -name "*.h" -or -name "*.c" -or -name "*.cpp"|egrep -v 'xxx' \
+	| xargs astyle -p --suffix=none --style=java
 
 .PHONY: all clean
