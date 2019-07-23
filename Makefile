@@ -44,7 +44,7 @@ Q=@
 NQ=echo
 $(OBJ_DIR)/%.o:%.c
 	$(Q)if [ ! -d $(OBJ_DIR) ]; then mkdir -p $(OBJ_DIR); fi;
-	@$(NQ) "Compiling: " $(addsuffix .cpp, $(basename $(notdir $@)))
+	@$(NQ) "Compiling: " $(addsuffix .c, $(basename $(notdir $@)))
 	$(Q)$(CC) -c $(CC_FLAGS) -o $@ $<
 $(OBJ_DIR)/%.o:%.cpp
 	$(Q)if [ ! -d $(OBJ_DIR) ]; then mkdir -p $(OBJ_DIR); fi;
